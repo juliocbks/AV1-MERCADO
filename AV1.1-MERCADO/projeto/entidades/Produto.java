@@ -115,18 +115,22 @@ public class Produto {
 
     // Lógica para visualizar um único produto com base no ID, loop for each
     public void visualizarProduto(ArrayList<Produto> lista, byte id) {
-        // boolean para indicar se existe ou não um produto no ID selecionado, com o padrão false:
+        // boolean para indicar se existe ou não um produto no ID selecionado, com o
+        // padrão false:
         boolean existe = false;
         for (Produto produto : lista) {
-            // Caso o id do produto seja o id inserido pelo usuário, irá listar o produto e definir que o produto existe:
+            // Caso o id do produto seja o id inserido pelo usuário, irá listar o produto e
+            // definir que o produto existe:
             if (produto.getID() == id) {
-                System.out.print("\n<<<|PRODUTO ID " + id + "|>>>" + "\nNome: " + produto.getNome() + "\nMarca: " + produto.getMarca() + "\nCategoria: " + produto.getCategoria() + "\nPreço: " + produto.getPreco() + "\nQuantidade: " + produto.getQnt() + "\n");
+                System.out.print("\n<<<|PRODUTO ID " + id + "|>>>" + "\nNome: " + produto.getNome() + "\nMarca: "
+                        + produto.getMarca() + "\nCategoria: " + produto.getCategoria() + "\nPreço: "
+                        + produto.getPreco() + "\nQuantidade: " + produto.getQnt() + "\n");
                 existe = true;
             }
         }
         // Caso não exista, irá exibir a mensagem:
         if (!existe) {
-            System.out.println("*** Não há nenhum produto com esse ID! ***");
+            System.out.println("\n*** Não há nenhum produto com esse ID! ***");
         }
     }
 
@@ -142,7 +146,9 @@ public class Produto {
         String marca = sc.nextLine();
         produto.setMarca(marca);
 
-        // No caso da categoria, irá listar as categorias e, com um switch case do tipo integer, definir a categoria do produto, caso o input não seja um número, irá pedir novamente para digitar um valor numérico:
+        // No caso da categoria, irá listar as categorias e, com um switch case do tipo
+        // integer, definir a categoria do produto, caso o input não seja um número, irá
+        // pedir novamente para digitar um valor numérico:
         byte cat = 0;
 
         do {
@@ -231,16 +237,22 @@ public class Produto {
 
     // Lógica para editar um produto(cada atributo dele):
     public void editarProduto(ArrayList<Produto> lista, byte id) {
-        // boolean para indicar se existe ou não um produto no ID selecionado, com o padrão false:
+        // boolean para indicar se existe ou não um produto no ID selecionado, com o
+        // padrão false:
         boolean existe = false;
         for (Produto produto : lista) {
-            // Se o id do produto for o id indicado pelo usuário, indicará os atributos do produto e definirá o boolean para true:
+            // Se o id do produto for o id indicado pelo usuário, indicará os atributos do
+            // produto e definirá o boolean para true:
             if (produto.getID() == id) {
-                System.out.print("\n<<<|PRODUTO ID " + id + "|>>>" + "\nNome: " + produto.getNome() + "\nMarca: " + produto.getMarca() + "\nCategoria: " + produto.getCategoria() + "\nPreço: " + produto.getPreco() + "\nQuantidade: " + produto.getQnt() + "\n");
+                System.out.print("\n<<<|PRODUTO ID " + id + "|>>>" + "\nNome: " + produto.getNome() + "\nMarca: "
+                        + produto.getMarca() + "\nCategoria: " + produto.getCategoria() + "\nPreço: "
+                        + produto.getPreco() + "\nQuantidade: " + produto.getQnt() + "\n");
                 existe = true;
             }
         }
-        // Caso o produto exista, irá perguntar qual atributo o usuário deseja editar e, dependendo da resposta, executará um dos switch case; caso não exista, enviará a mensagem:
+        // Caso o produto exista, irá perguntar qual atributo o usuário deseja editar e,
+        // dependendo da resposta, executará um dos switch case; caso não exista,
+        // enviará a mensagem:
         int escolha = 0;
         if (existe) {
             do{
@@ -259,7 +271,9 @@ public class Produto {
                                 if (produto.getID() == id) {
                                     produto.setNome(newNome);
                                     System.out.println("*** Nome atualizado com sucesso! ***");
-                                    System.out.print("\n<<<|PRODUTO ID " + id + "|>>>" + "\nNome: " + produto.getNome() + "\nMarca: " + produto.getMarca() + "\nCategoria: " + produto.getCategoria() + "\nPreço: " + produto.getPreco() + "\nQuantidade: " + produto.getQnt() + "\n");
+                                    System.out.print("\n<<<|PRODUTO ID " + id + "|>>>" + "\nNome: " + produto.getNome() + "\nMarca: "
+                                    + produto.getMarca() + "\nCategoria: " + produto.getCategoria() + "\nPreço: "
+                                    + produto.getPreco() + "\nQuantidade: " + produto.getQnt() + "\n");
                                 }
                             }
                             break;
@@ -273,7 +287,9 @@ public class Produto {
                                 if (produto.getID() == id) {
                                     produto.setMarca(newMarca);
                                     System.out.println("*** Marca atualizada com sucesso! ***");
-                                    System.out.print("\n<<<|PRODUTO ID " + id + "|>>>" + "\nNome: " + produto.getNome() + "\nMarca: " + produto.getMarca() + "\nCategoria: " + produto.getCategoria() + "\nPreço: " + produto.getPreco() + "\nQuantidade: " + produto.getQnt() + "\n");
+                                    System.out.print("\n<<<|PRODUTO ID " + id + "|>>>" + "\nNome: " + produto.getNome() + "\nMarca: "
+                                    + produto.getMarca() + "\nCategoria: " + produto.getCategoria() + "\nPreço: "
+                                    + produto.getPreco() + "\nQuantidade: " + produto.getQnt() + "\n");
                                 }
                             }
                             break;
@@ -290,7 +306,7 @@ public class Produto {
                                             if(sc.hasNextByte()) {
                                                 newCat = sc.nextByte();
                                                 if (newCat<1|| newCat>11) {
-                                                    System.out.println("*** Insira um valor válido! ***");
+                                                    System.out.println("\n*** Insira um valor válido! ***");
                                                 }
                                                 switch (newCat) {
                                                     case 1:
@@ -338,9 +354,11 @@ public class Produto {
                                                         System.out.println("*** Categoria atualizada com sucesso! ***");
                                                         break;
                                                 } 
-                                                System.out.print("\n<<<|PRODUTO ID " + id + "|>>>" + "\nNome: " + produto.getNome() + "\nMarca: " + produto.getMarca() + "\nCategoria: " + produto.getCategoria() + "\nPreço: " + produto.getPreco() + "\nQuantidade: " + produto.getQnt() + "\n");
+                                                System.out.print("\n<<<|PRODUTO ID " + id + "|>>>" + "\nNome: " + produto.getNome() + "\nMarca: "
+                                                + produto.getMarca() + "\nCategoria: " + produto.getCategoria() + "\nPreço: "
+                                                + produto.getPreco() + "\nQuantidade: " + produto.getQnt() + "\n");
                                             } else {
-                                                System.out.println("*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***");
+                                                System.out.println("\n*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***");
                                                 sc.next();
                                             }
                                         break;
@@ -362,7 +380,9 @@ public class Produto {
                                         if (produto.getID() == id) {
                                             produto.setPreco(newPreco);
                                             System.out.println("*** O preço do produto foi atualizado com sucesso! ***");
-                                            System.out.print("\n<<<|PRODUTO ID " + id + "|>>>" + "\nNome: " + produto.getNome() + "\nMarca: " + produto.getMarca() + "\nCategoria: " + produto.getCategoria() + "\nPreço: " + produto.getPreco() + "\nQuantidade: " + produto.getQnt() + "\n");
+                                            System.out.print("\n<<<|PRODUTO ID " + id + "|>>>" + "\nNome: " + produto.getNome() + "\nMarca: "
+                                            + produto.getMarca() + "\nCategoria: " + produto.getCategoria() + "\nPreço: "
+                                            + produto.getPreco() + "\nQuantidade: " + produto.getQnt() + "\n");
                                         }
                                     }
                                 break;
@@ -376,14 +396,17 @@ public class Produto {
                         // Editar a quantidade - diminuir ou adicionar à quantidade atual de x produto:
                         case 5:
                             do{
-                                System.out.print("\n-> Digite o valor a adicionar, para diminuir, insira um valor negativo: ");
+                                System.out.print("-> Digite o valor a adicionar, para diminuir, insira um valor negativo: ");
                                 if(sc.hasNextInt()) {
                                     int newQnt = sc.nextInt();
                                     for (Produto produto : lista) {
                                         // Adicionar à quantidade atual de produtos a quantidade inserida pelo usuário:
                                         if (produto.getID() == id) {
                                             produto.setQnt(produto.getQnt() + newQnt);
-                                            System.out.print("\n<<<|PRODUTO ID " + id + "|>>>" + "\nNome: " + produto.getNome() + "\nMarca: " + produto.getMarca() + "\nCategoria: " + produto.getCategoria() + "\nPreço: " + produto.getPreco() + "\nQuantidade: " + produto.getQnt() + "\n");
+                                            System.out.println("*** A quantidade do produto foi atualizado com sucesso! ***");
+                                            System.out.print("\n<<<|PRODUTO ID " + id + "|>>>" + "\nNome: " + produto.getNome() + "\nMarca: "
+                                            + produto.getMarca() + "\nCategoria: " + produto.getCategoria() + "\nPreço: "
+                                            + produto.getPreco() + "\nQuantidade: " + produto.getQnt() + "\n");
                                             break;
                                         }
                                     }
@@ -395,41 +418,47 @@ public class Produto {
                             } while(true);
                             break;
                         case 0:
-                            System.out.println("*** Voltando ao menu principal! ***");
+                            System.out.println("\n*** Voltando ao menu principal! ***");
                             sc.nextLine();
                             return;
                         default:
                             // Caso insira uma opção fora das 5 opções de edição:
-                            System.out.println("*** Digite uma opção válida! ***");
+                            System.out.println("\n*** Digite uma opção válida! ***");
                             sc.nextLine();
                     }
                 } else {
-                    System.out.println("*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***");
+                    System.out.println("\n*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***");
                     sc.next();
                 }
             } while (true);
         } else {
             // Caso digite um id incorreto de produto:
-            System.out.println("*** Não há nenhum produto com esse ID! ***");
+            System.out.println("\n*** Não há nenhum produto com esse ID! ***");
         }
     }
 
-    // Lógica para remover um produto com for each e remover o ID da lista de IDs, para que possa ser gerado novamente, foi necessária a criação de uma nova lista de objetos, para evitar que aconteça o erro de remoção dentro do loop:
+    // Lógica para remover um produto com for each e remover o ID da lista de IDs,
+    // para que possa ser gerado novamente, foi necessária a criação de uma nova
+    // lista de objetos, para evitar que aconteça o erro de remoção dentro do loop:
     public void removerProduto(ArrayList<Produto> lista, byte id) {
-        // boolean para indicar se existe ou não um produto no ID selecionado, com o padrão false:
+        // boolean para indicar se existe ou não um produto no ID selecionado, com o
+        // padrão false:
         boolean existe = false;
         ArrayList<Produto> listaProdutos2 = new ArrayList<>(lista);
         for (Produto produto : listaProdutos2) {
-            // Se o id do produto for o id indicado pelo usuário, definirá o boolean para true, removerá o produto da ArrayList e removerá o seu id da ArrayList de IDs:
+            // Se o id do produto for o id indicado pelo usuário, definirá o boolean para
+            // true, removerá o produto da ArrayList e removerá o seu id da ArrayList de
+            // IDs:
             if (produto.getID() == id) {
                 existe = true;
                 lista.remove(produto);
                 IDs.remove(IDs.indexOf(produto.getID()));
             }
         }
-        // Caso não exista, enviará uma mensagem indicando, caso contrário, enviará a mensagem que o produto foi removido:
+        // Caso não exista, enviará uma mensagem indicando, caso contrário, enviará a
+        // mensagem que o produto foi removido:
         if (!existe) {
-            System.out.println("*** Não há nenhum produto com esse ID! ***");
+            System.out.println("\n*** Não há nenhum produto com esse ID! ***");
         } else {
             System.out.println("*** Produto removido! ***");
         }
@@ -441,21 +470,24 @@ public class Produto {
         // Enviar categorias:
         byte catv = 0;
         do {
-            System.out.println("\n-----<<<|CATEGORIAS|>>>----- \n1-BEBIDAS; \n2-CARNES; \n3-CEREAIS; \n4-FRIOS; \n5-HIGIENE; " + " \n6-HORTIFRUTI; \n7-LIMPEZA; \n8-MERCEARIA; \n9-PADARIA; \n10-PETSHOP; \n11-OUTROS.");
+            System.out.println(
+                    "\n-----<<<|CATEGORIAS|>>>----- \n1-BEBIDAS; \n2-CARNES; \n3-CEREAIS; \n4-FRIOS; \n5-HIGIENE; " +
+                            " \n6-HORTIFRUTI; \n7-LIMPEZA; \n8-MERCEARIA; \n9-PADARIA; \n10-PETSHOP; \n11-OUTROS.");
             System.out.print("-> Insira a categoria a visualizar: ");
             if(sc.hasNextByte()) {
                 catv = sc.nextByte();
                 if (catv>11 || catv<1) {
-                    System.out.println("*** Insira um valor válido! ***");
+                    System.out.println("\n*** Insira um valor válido! ***");
                 }
                 sc.nextLine();
             } else {
-                System.out.println("*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***");
+                System.out.println("\n*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***");
                 sc.nextLine();
             }
         } while (catv < 1 || catv > 11);
         Categorias categoriafiltro = outros;
-        // Switch case para definir a categoria a ser filtrada, a categoria padrão é OUTROS:
+        // Switch case para definir a categoria a ser filtrada, a categoria padrão é
+        // OUTROS:
         switch (catv) {
             case 1:
                 categoriafiltro = bebidas;
@@ -492,11 +524,13 @@ public class Produto {
                 break;
             default:
         }
-        // boolean para indicar se existe ou não um produto no ID selecionado, com o padrão false:
+        // boolean para indicar se existe ou não um produto no ID selecionado, com o
+        // padrão false:
         boolean possui = false;
         System.out.println("\n-----<<<|" + categoriafiltro + "|>>>-----");
         for (Produto produto : lista) {
-            // Se a categoria do produto for a mesma selecionada, irá definir o boolean possui para true e enviá-la:
+            // Se a categoria do produto for a mesma selecionada, irá definir o boolean
+            // possui para true e enviá-la:
             if (produto.getCategoria() == categoriafiltro) {
                 System.out.print("\nID: " + produto.getID() + " ||Nome: " + produto.getNome() + "\n");
                 possui = true;
@@ -504,7 +538,8 @@ public class Produto {
                 continue;
             }
         }
-        // Caso não possua, irá enviar a mensagem, indicando que não há produtos em dada categoria:
+        // Caso não possua, irá enviar a mensagem, indicando que não há produtos em dada
+        // categoria:
         if (!possui) {
             System.out.println("\n*** Não há produtos nesta categoria! ***");
         }

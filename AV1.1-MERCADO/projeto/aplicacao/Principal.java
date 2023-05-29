@@ -7,6 +7,7 @@ import projeto.entidades.Produto;
 import projeto.entidades.Categorias;
 
 public class Principal {
+    // Apresentação dia 29/05/2023
     public static void main(String[] args) {
         // Variáveis:
         byte opcao = 127, id = 0;
@@ -107,16 +108,32 @@ public class Principal {
                     produto.cadastrarProduto(listaProdutos);
                     break;
                 case 5:
-                    produto.listarProdutos(listaProdutos);
-                    System.out.print("\n-> Digite o ID do produto que você deseja editar: ");
-                    id = sc.nextByte();
-                    produto.editarProduto(listaProdutos, id);
+                    do{
+                        produto.listarProdutos(listaProdutos);
+                        System.out.print("\n-> Digite o ID do produto que você deseja editar: ");
+                        if(sc.hasNextByte()) {
+                            id = sc.nextByte();
+                            produto.editarProduto(listaProdutos, id);
+                            break;
+                        } else {
+                            System.out.println("\n*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***");
+                            sc.next();
+                        }
+                    } while(true);
                     break;
                 case 6:
-                    produto.listarProdutos(listaProdutos);
-                    System.out.print("\n-> Digite o ID do produto que você deseja remover: ");
-                    id = sc.nextByte();
-                    produto.removerProduto(listaProdutos, id);
+                    do{
+                        produto.listarProdutos(listaProdutos);
+                        System.out.print("\n-> Digite o ID do produto que você deseja remover: ");
+                        if(sc.hasNextByte()) {
+                        id = sc.nextByte();
+                        produto.removerProduto(listaProdutos, id);
+                        break;
+                        } else {
+                            System.out.println("\n*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***");
+                            sc.next();
+                        }
+                    } while(true);
                     break;
                 case 0:
                     System.out.println("\n*** Programa encerrado! ***");

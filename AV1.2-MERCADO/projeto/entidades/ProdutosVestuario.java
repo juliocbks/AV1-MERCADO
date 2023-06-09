@@ -1,7 +1,7 @@
 package projeto.entidades;
 
+// Classe filha da classe Produto, com os atributos tamanho, cor e material:
 public class ProdutosVestuario extends Produto {
-
     private String tamanhoV;
     private String cor;
     private String material;
@@ -10,6 +10,7 @@ public class ProdutosVestuario extends Produto {
 
     }
 
+    // Atribuindo atributos ao produto:
     public ProdutosVestuario(String nome, String marca, Categorias categoria, double preco, int qnt, int id, String tamanhoV, String cor, String material) {
         super(nome, marca, categoria, preco, qnt, id);
         this.tamanhoV = tamanhoV;
@@ -17,6 +18,7 @@ public class ProdutosVestuario extends Produto {
         this.material = material;
     }
 
+    // Getters:
     public String getTamanhoV() {
         return tamanhoV;
     }
@@ -27,6 +29,7 @@ public class ProdutosVestuario extends Produto {
         return material;
     }
 
+    // Setters:
     public void setTamanho(String tamanhoV) {
         this.tamanhoV = tamanhoV;
     }

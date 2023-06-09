@@ -1,12 +1,12 @@
 package projeto.entidades;
 
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Comparator;
-import java.util.stream.Collectors;
-import java.io.*;
+import java.util.Scanner; // Utilizado para realizar a entrada de dados do usuário;
+import java.util.ArrayList; // Utilizado para armazenar dados;
+import java.util.List; // Utilizado para armazenar dados;
+import java.util.Random; // Utilizado para gerar números aleatórios em um range;
+import java.util.Comparator; // Utilizado para ordenação;
+import java.util.stream.Collectors; // Utilizado para ordenação;
+import java.io.*; // Utilizado para adicioanr cor ao terminal;
 
 public class Produto {
 
@@ -109,12 +109,10 @@ public class Produto {
 
     // Lógica para visualizar um único produto com base no ID, loop for each
     public void visualizarProduto(ArrayList<Produto> lista, byte id) {
-        // boolean para indicar se existe ou não um produto no ID selecionado, com o
-        // padrão false: 
+        // boolean para indicar se existe ou não um produto no ID selecionado, com o padrão false: 
         boolean existe = false;
         for (Produto produto : lista) {
-            // Caso o id do produto seja o id inserido pelo usuário, irá listar o produto e
-            // definir que o produto existe:
+            // Caso o id do produto seja o id inserido pelo usuário, irá listar o produto e definir que o produto existe:
             if (produto.getID() == id) {
                 // Listar todos os atributos padrões da classe Produto:
                 System.out.print("\n<<<|PRODUTO ID " + id + "|>>>" + "\nNome: " + produto.getNome() + "\nMarca: "
@@ -151,9 +149,7 @@ public class Produto {
         String marca = sc.nextLine();
         produto.setMarca(marca);
 
-        // No caso da categoria, irá listar as categorias e, com um switch case do tipo
-        // integer, definir a categoria do produto, caso o input não seja um número, irá
-        // pedir novamente para digitar um valor numérico:
+        // No caso da categoria, irá listar as categorias e, com um switch case do tipo integer, definir a categoria do produto, caso o input não seja um número, irá pedir novamente para digitar um valor numérico:
         byte cat = 0;
 
         do {
@@ -189,6 +185,7 @@ public class Produto {
         sc.nextLine();
     }
 
+    // Método para cadastrar um produto alimentício:
     public void cadastrarProdutoAlimenticio(ArrayList<Produto> lista) {
         ProdutosAlimenticios produto = new ProdutosAlimenticios();
         // Cadastro geral classe mãe:
@@ -205,7 +202,7 @@ public class Produto {
                 sc.next();
             }
         } while (true);
-
+        
         // Cadastrar data de validade:
         System.out.print("\n-> Insira a data de validade do produto(dd/MM/yyyy): ");
         String dataValidade = sc.nextLine();
@@ -216,6 +213,7 @@ public class Produto {
         lista.add(produto);
     }
 
+    // Método para cadastrar um produto eletrônico:
     public void cadastrarProdutoEletronico(ArrayList<Produto> lista) {
         ProdutosEletronicos produto = new ProdutosEletronicos();
         // Cadastro geral classe mãe:
@@ -253,6 +251,7 @@ public class Produto {
         lista.add(produto);
     }
 
+    // Método para cadastrar um produto de vestuário:
     public void cadastrarProdutoVestuario(ArrayList<Produto> lista) {
         ProdutosVestuario produto = new ProdutosVestuario();
         // Cadastro geral classe mãe:
@@ -286,6 +285,7 @@ public class Produto {
         lista.add(produto);
     }
     
+    // Método para editar o nome:
     public void editarNome(ArrayList<Produto> lista, byte id) {
         System.out.print("-> Insira o novo nome: ");
         sc.nextLine();
@@ -298,7 +298,8 @@ public class Produto {
             }
         }
     }
-
+    
+    // Método para editar a marca:
     public void editarMarca(ArrayList<Produto> lista, byte id) {
         System.out.print("-> Insira a nova marca: ");
         sc.nextLine();
@@ -311,7 +312,8 @@ public class Produto {
             }
         }
     }
-
+    
+    // Método para editar o preço:
     public void editarPreco(ArrayList<Produto> lista, byte id) {
         do {
             System.out.print("-> Insira o novo preço: ");
@@ -333,6 +335,7 @@ public class Produto {
         } while (true);
     }
 
+    // Método para editar a quantidade:
     public void editarQuantidade(ArrayList<Produto> lista, byte id) {
         do{
             System.out.print("-> Digite o valor a adicionar, para diminuir, insira um valor negativo: ");
@@ -355,6 +358,7 @@ public class Produto {
         } while(true);
     }
 
+    // Método para editar o peso:
     public void editarPeso(ArrayList<Produto> lista, byte id) {
             do {
                 System.out.print("-> Insira o novo peso: ");
@@ -377,6 +381,7 @@ public class Produto {
             } while (true);
     }
 
+    // Método para editar a data de validade:
     public void editarDataValidade(ArrayList<Produto> lista, byte id) {
         System.out.print("-> Insira a nova data de validade: ");
         String newDataValidade = sc.nextLine();
@@ -390,6 +395,7 @@ public class Produto {
         }
     }
 
+    // Método para editar o modelo:
     public void editarModelo(ArrayList<Produto> lista, byte id) {
         System.out.print("-> Insira o novo modelo: ");
         String newModelo = sc.nextLine();
@@ -403,6 +409,7 @@ public class Produto {
         visualizarProduto(lista, id);
     }
 
+    // Método para editar o tamanho do eletrônico:
     public void editarTamanhoE(ArrayList<Produto> lista, byte id) {
         System.out.print("-> Insira o novo tamanho: ");
         String newTamanhoE = sc.nextLine();
@@ -416,6 +423,7 @@ public class Produto {
         }
     }
 
+    // Método para editar as conexões:
     public void editarConexoes(ArrayList<Produto> lista, byte id) {
         String newConexoes;
         System.out.print("-> Insira as novas conexões: ");
@@ -430,6 +438,7 @@ public class Produto {
         }
     }
 
+    // Método para editar o tamanho da vestimenta:
     public void editarTamanhoV(ArrayList<Produto> lista, byte id) {
         System.out.print("-> Insira o novo tamanho: ");
         String newTamanhoV = sc.nextLine();
@@ -443,6 +452,7 @@ public class Produto {
         }
     }
 
+    // Método para editar a cor:
     public void editarCor(ArrayList<Produto> lista, byte id) {
         System.out.print("-> Insira a nova cor: ");
         String newCor = sc.nextLine();
@@ -456,6 +466,7 @@ public class Produto {
         }
     }
 
+    // Método para editar o material:
     public void editarMaterial(ArrayList<Produto> lista, byte id) {
         System.out.print("-> Insira o novo material: ");
         String newMaterial = sc.nextLine();
@@ -471,8 +482,7 @@ public class Produto {
 
     // Lógica para editar um produto alimenticio(cada atributo dele):
     public void editarProdutoAlimenticio(ArrayList<Produto> lista, byte id) {
-        // boolean para indicar se existe ou não um produto no ID selecionado, com o
-        // padrão false:
+        // boolean para indicar se existe ou não um produto no ID selecionado, com o padrão false:
         boolean existe = true;
         for (Produto produto : lista) {
             // Se o id do produto for o id indicado pelo usuário, indicará os atributos do
@@ -484,9 +494,7 @@ public class Produto {
             }
         }
 
-        // Caso o produto exista, irá perguntar qual atributo o usuário deseja editar e,
-        // dependendo da resposta, executará um dos switch case; caso não exista,
-        // enviará a mensagem:
+        // Caso o produto exista, irá perguntar qual atributo o usuário deseja editar e, dependendo da resposta, executará um dos switch case; caso não exista, enviará a mensagem:
         byte escolha;
         if (existe) {
             do{
@@ -537,20 +545,16 @@ public class Produto {
 
     // Lógica para editar um produto eletrônico(cada atributo dele):
     public void editarProdutoEletronico(ArrayList<Produto> lista, byte id) {
-        // boolean para indicar se existe ou não um produto no ID selecionado, com o
-        // padrão false:
+        // boolean para indicar se existe ou não um produto no ID selecionado, com o padrão false:
         boolean existe = false;
         for (Produto produto : lista) {
-            // Se o id do produto for o id indicado pelo usuário, indicará os atributos do
-            // produto e definirá o boolean para true:
+            // Se o id do produto for o id indicado pelo usuário, indicará os atributos do produto e definirá o boolean para true:
             if (produto.getID() == id) {
                 visualizarProduto(lista, id);
                 existe = true;
             }
         }
-        // Caso o produto exista, irá perguntar qual atributo o usuário deseja editar e,
-        // dependendo da resposta, executará um dos switch case; caso não exista,
-        // enviará a mensagem:
+        // Caso o produto exista, irá perguntar qual atributo o usuário deseja editar e, dependendo da resposta, executará um dos switch case; caso não exista, enviará a mensagem:
         byte escolha = 0;
         if (existe) {
             do{
@@ -601,20 +605,16 @@ public class Produto {
 
     // Lógica para editar um produto de vestuário(cada atributo dele):
     public void editarProdutoVestuario(ArrayList<Produto> lista, byte id) {
-        // boolean para indicar se existe ou não um produto no ID selecionado, com o
-        // padrão false:
+        // boolean para indicar se existe ou não um produto no ID selecionado, com o padrão false:
         boolean existe = false;
         for (Produto produto : lista) {
-            // Se o id do produto for o id indicado pelo usuário, indicará os atributos do
-            // produto e definirá o boolean para true:
+            // Se o id do produto for o id indicado pelo usuário, indicará os atributos do produto e definirá o boolean para true:
             if (produto.getID() == id) {
                 visualizarProduto(lista, id);
                 existe = true;
             }
         }
-        // Caso o produto exista, irá perguntar qual atributo o usuário deseja editar e,
-        // dependendo da resposta, executará um dos switch case; caso não exista,
-        // enviará a mensagem:
+        // Caso o produto exista, irá perguntar qual atributo o usuário deseja editar e, dependendo da resposta, executará um dos switch case, caso não exista, enviará a mensagem:
         byte escolha = 0;
         if (existe) {
             do{
@@ -663,18 +663,14 @@ public class Produto {
         }
     }
 
-    // Lógica para remover um produto com for each e remover o ID da lista de IDs,
-    // para que possa ser gerado novamente, foi necessária a criação de uma nova
-    // lista de objetos, para evitar que aconteça o erro de remoção dentro do loop:
+    // Lógica para remover um produto com for each e remover o ID da lista de IDs, para que possa ser gerado novamente, foi necessária a criação de uma nova lista de objetos, para evitar que aconteça o erro de remoção dentro do loop:
     public void removerProduto(ArrayList<Produto> lista, byte id) {
         // boolean para indicar se existe ou não um produto no ID selecionado, com o
         // padrão false:
         boolean existe = false;
         ArrayList<Produto> listaProdutosTemp = new ArrayList<>(lista);
         for (Produto produto : listaProdutosTemp) {
-            // Se o id do produto for o id indicado pelo usuário, definirá o boolean para
-            // true, removerá o produto da ArrayList e removerá o seu id da ArrayList de
-            // IDs:
+            // Se o id do produto for o id indicado pelo usuário, definirá o boolean para true, removerá o produto da ArrayList e removerá o seu id da ArrayList de IDs:
             if (produto.getID() == id) {
                 existe = true;
                 System.out.print("Deseja mesmo remover o produto ID "+id+" - "+produto.getNome()+"? (s/n): ");
@@ -693,8 +689,7 @@ public class Produto {
                 }
             }
         }
-        // Caso não exista, enviará uma mensagem indicando, caso contrário, enviará a
-        // mensagem que o produto foi removido:
+        // Caso não exista, enviará uma mensagem indicando, caso contrário, enviará a mensagem que o produto foi removido:
         if (!existe) {
             System.out.println("\n*** Não há nenhum produto com esse ID! ***");
         }
@@ -743,16 +738,15 @@ public class Produto {
                 categoriafiltro = Categorias.VESTUARIO;
                 break;
         }
-        // boolean para indicar se existe ou não um produto no ID selecionado, com o
-        // padrão false:
+        // boolean para indicar se existe ou não um produto no ID selecionado, com o padrão false:
         boolean possui = false;
+        
         // Ordenar a lista com Comparator e stream.collectors:
         List<Produto> listaOrdenadaFiltro = lista.stream().sorted(Comparator.comparingInt(Produto::getID)).collect(Collectors.toList());
         System.out.print("\n-----<<<|"+categoriafiltro+"|>>>----- \n");
         for (Produto produtoOrd : listaOrdenadaFiltro) {
             if(produtoOrd.getCategoria()==categoriafiltro) {
-                    // Se a categoria do produto for a mesma selecionada, irá definir o boolean
-                   // possui para true e enviá-la:
+                    // Se a categoria do produto for a mesma selecionada, irá definir o boolean possui para true e enviá-la:
                    if (produtoOrd.getCategoria() == categoriafiltro) {
                        System.out.print("\nID: " + produtoOrd.getID() + " ||Nome: " + produtoOrd.getNome() + "\n");
                        possui = true;
@@ -761,8 +755,8 @@ public class Produto {
                    }
             }
         }
-        // Caso não possua, irá enviar a mensagem, indicando que não há produtos em dada
-        // categoria:
+        
+        // Caso não possua, irá enviar a mensagem, indicando que não há produtos em dada categoria:
         if (!possui) {
             System.out.println("\n*** Não há produtos nesta categoria! ***");
         }

@@ -1,7 +1,7 @@
 package projeto.entidades;
 
+// Classe filha da classe Produto, com os atributos modelo, tamanho e conexões:
 public class ProdutosEletronicos extends Produto {
-
     private String modelo;
     private String tamanhoE;
     private String conexoes;
@@ -10,6 +10,7 @@ public class ProdutosEletronicos extends Produto {
 
     }
 
+    // Atribuindo atributos ao produto:
     public ProdutosEletronicos(String nome, String marca, Categorias categoria, double preco, int qnt, int id, String modelo, String tamanhoE, String conexoes) {
         super(nome, marca, categoria, preco, qnt, id);
         this.modelo = modelo;
@@ -17,6 +18,7 @@ public class ProdutosEletronicos extends Produto {
         this.conexoes = conexoes;
     }
 
+    // Getters:
     public String getModelo() {
         return modelo;
     }
@@ -27,6 +29,7 @@ public class ProdutosEletronicos extends Produto {
         return conexoes;
     }
 
+    // Setters:
     public void setModelo(String modelo) {
         this.modelo = modelo;
     }

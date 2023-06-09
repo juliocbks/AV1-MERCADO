@@ -2,14 +2,9 @@ package projeto.entidades;
 
 import java.util.ArrayList;
 
+// Inicialização dos produtos pré-definidos:
 public class InicializadorProdutos {
-   
-    // Cores para as mensagens do terminal:
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-
     public static void inicializarProdutos(ArrayList<Produto> listaProdutos) {
-    // Inicialização dos produtos pré-definidos:
     ProdutosAlimenticios a1 = new ProdutosAlimenticios("Feijão Carioca", "Camil", Categorias.ALIMENTOS, 9.90, 542, Produto.randomNum(), 1, "12 meses");
     listaProdutos.add(a1);
 

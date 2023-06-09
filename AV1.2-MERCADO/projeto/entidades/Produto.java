@@ -6,10 +6,9 @@ import java.util.List; // Utilizado para armazenar dados;
 import java.util.Random; // Utilizado para gerar números aleatórios em um range;
 import java.util.Comparator; // Utilizado para ordenação;
 import java.util.stream.Collectors; // Utilizado para ordenação;
-import java.io.*; // Utilizado para adicioanr cor ao terminal;
 
+// Classe pai Produto:
 public class Produto {
-
     // Atributos:
     private String nome, marca;
     Categorias categoria;
@@ -17,8 +16,10 @@ public class Produto {
     private int qnt, id;
 
     public Produto() {
+
     };
 
+    // Atribuindo os atibutos da classe pai:
     public Produto(String nome, String marca, Categorias categoria, double preco, int qnt, int id) {
         this.nome = nome;
         this.marca = marca;
@@ -29,63 +30,51 @@ public class Produto {
     }
 
     // Criando Setters:
-
     public void setNome(String nome) {
         this.nome = nome;
     }
-
     public void setMarca(String marca) {
         this.marca = marca;
     }
-
     public void setCategoria(Categorias categoria) {
         this.categoria = categoria;
     }
-
     public void setPreco(double preco) {
         this.preco = preco;
     }
-
     public void setQnt(int qnt) {
         this.qnt = qnt;
     }
-
     public void setID(int id) {
         this.id = id;
     }
 
     // Criando Getters:
-
     public String getNome() {
         return nome;
     }
-
     public String getMarca() {
         return marca;
     }
-
     public Categorias getCategoria() {
         return categoria;
     }
-
     public double getPreco() {
         return preco;
     }
-
     public int getQnt() {
         return qnt;
     }
-
     public int getID() {
         return id;
     }
 
-    // Inicializando ArrayList de IDs e objetos
+    // Inicializando ArrayList de IDs e objetos - Random e Scanner:
     static ArrayList<Integer> IDs = new ArrayList<>(100);
     static Random rnd = new Random();
     Scanner sc = new Scanner(System.in);
 
-    // Gerar IDs aleatórios para cada produto
+    // Método para gerar IDs aleatórios para cada produto(range de 0 a 100):
     public static int randomNum() {
         int random = rnd.nextInt(100);
         if (IDs.contains(random)) {
@@ -96,18 +85,18 @@ public class Produto {
         return random;
     }
 
-    // Lógica para listar todos os produtos com for each:
+    // Método para listar todos os produtos com for each:
     public void listarProdutos(ArrayList<Produto> lista) {
         // Ordenar a lista com Comparator e Stream.collectors:
         List<Produto> listaOrdenada = lista.stream().sorted(Comparator.comparingInt(Produto::getID)).collect(Collectors.toList());
-
+        // Listar produtos com for each:
         System.out.print("\n-----<<<|LISTA DE PRODUTOS[" + listaOrdenada.size() + "]|>>>----- \n");
         for (Produto produto : listaOrdenada) {
             System.out.print("\nID: " + produto.getID() + " || "  + produto.getCategoria() + " || Nome: " + produto.getNome() + "\n");
         }
     }
 
-    // Lógica para visualizar um único produto com base no ID, loop for each
+    // Método para visualizar um único produto com base no ID, loop for each
     public void visualizarProduto(ArrayList<Produto> lista, byte id) {
         // boolean para indicar se existe ou não um produto no ID selecionado, com o padrão false: 
         boolean existe = false;
@@ -119,7 +108,7 @@ public class Produto {
                 + produto.getMarca() + "\nCategoria: " + produto.getCategoria() + "\nPreço: "
                 + produto.getPreco() + "\nQuantidade: " + produto.getQnt() + "\n");
 
-                // Listar atributos de cada classe filha separada:
+                // Listar atributos de cada classe filha separados:
                 if(produto.getCategoria()==Categorias.ALIMENTOS) {
                     ProdutosAlimenticios pAlimento = (ProdutosAlimenticios) produto;
                     System.out.print("Peso(kg/l): " + pAlimento.getPeso() + "\nData de validade: " + pAlimento.getDataValidade()+"\n");
@@ -135,92 +124,92 @@ public class Produto {
         }
         // Caso não exista, irá exibir a mensagem:
         if (!existe) {
-            System.out.println("\n*** Não há nenhum produto com esse ID! ***");
+            System.out.println(Cores.VERMELHO+"\n*** Não há nenhum produto com esse ID! ***"+Cores.RESET);
         }
     }
 
-    // Lógica para cadastrar um novo produto:
+    // Método para cadastrar um novo produto:
     public void cadastro(Produto produto, Categorias categoria) {
-        System.out.print("\n-> Insira o nome do produto: ");
-        String nome = sc.nextLine(); // Input/Entrada
-        produto.setNome(nome); // Setar/Definir nome
+        // Cadastrar nome:
+        System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira o nome do produto"+Cores.RESET+": ");
+        String nome = sc.nextLine(); // Input/Entrada.
+        produto.setNome(nome); // Setar/Definir valor ao atributo.
 
-        System.out.print("\n-> Insira a marca do produto: ");
+        // Cadastrar marca:
+        System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira a marca do produto"+Cores.RESET+": ");
         String marca = sc.nextLine();
         produto.setMarca(marca);
 
-        // No caso da categoria, irá listar as categorias e, com um switch case do tipo integer, definir a categoria do produto, caso o input não seja um número, irá pedir novamente para digitar um valor numérico:
-        byte cat = 0;
-
+        // Cadastrar preço:
         do {
-            System.out.print("\n-> Insira o preço do produto: ");
+            System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira o preço do produto"+Cores.RESET+": ");
             if (sc.hasNextDouble()) {
                 double preco = sc.nextDouble();
                 produto.setPreco(preco);
                 break;
             } else {
-                System.out.println("*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***");
+                System.out.println(Cores.VERMELHO+"*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***"+Cores.RESET);
                 sc.next();
             }
-
         } while (true);
 
+        // Cadastrar quantidade:
         do {
-            System.out.print("\n-> Insira a quantidade do produto: ");
+            System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira a quantidade do produto"+Cores.RESET+": ");
             if (sc.hasNextInt()) {
                 int qnt = sc.nextInt();
                 produto.setQnt(qnt);
                 break;
             } else {
-                System.out.println("*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***");
+                System.out.println(Cores.VERMELHO+"*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***"+Cores.RESET);
                 sc.next();
             }
         } while (true);
 
+        // Setar categoria:
         produto.setCategoria(categoria);
-
         // ID aleatório gerado automaticamente:
         produto.setID(randomNum());
-        // Limpando buffer:
+        // Limpar buffer:
         sc.nextLine();
     }
 
-    // Método para cadastrar um produto alimentício:
     public void cadastrarProdutoAlimenticio(ArrayList<Produto> lista) {
         ProdutosAlimenticios produto = new ProdutosAlimenticios();
         // Cadastro geral classe mãe:
         cadastro(produto, Categorias.ALIMENTOS);
+
         // Cadastrar peso:
         do {
-            System.out.print("\n-> Insira o peso do produto: ");
+            System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira o peso do produto"+Cores.RESET+": ");
             if (sc.hasNextDouble()) {
                 double peso = sc.nextDouble();
+                sc.nextLine();
                 produto.setPeso(peso);
                 break;
             } else {
-                System.out.println("*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***");
+                System.out.println(Cores.VERMELHO+"*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***"+Cores.RESET);
                 sc.next();
             }
         } while (true);
-        
+
         // Cadastrar data de validade:
-        System.out.print("\n-> Insira a data de validade do produto(dd/MM/yyyy): ");
+        System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira a data de validade do produto(meses)"+Cores.RESET+": ");
         String dataValidade = sc.nextLine();
         produto.setDataValidade(dataValidade);
-        // Limpando buffer:
-        sc.nextLine();
+
         // Adicionar produto à lista:
         lista.add(produto);
     }
 
-    // Método para cadastrar um produto eletrônico:
     public void cadastrarProdutoEletronico(ArrayList<Produto> lista) {
         ProdutosEletronicos produto = new ProdutosEletronicos();
         // Cadastro geral classe mãe:
         cadastro(produto, Categorias.ELETRONICOS);
+        
         // Cadastrar modelo:
         do {
-            System.out.print("\n-> Insira o modelo do produto: ");
+            System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira o modelo do produto"+Cores.RESET+": ");
             String modelo = sc.nextLine();
             produto.setModelo(modelo);
             break;
@@ -228,30 +217,30 @@ public class Produto {
 
         // Cadastrar tamanho:
         do {
-            System.out.print("\n-> Insira o tamanho do produto: ");
+            System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira o tamanho do produto"+Cores.RESET+": ");
             if(sc.hasNextDouble()) {
                 String tamanho = sc.nextLine();
                 produto.setTamanho(tamanho);
                 break;
             }
             else {
-                System.out.println("*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***");
+                System.out.println(Cores.VERMELHO+"*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***"+Cores.RESET);
                 sc.next();
             }
         } while (true);
 
         // Cadastrar conexões:
         do {
-            System.out.print("\n-> Insira as conexões do produto: ");
+            System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira as conexões do produto"+Cores.RESET+": ");
             String conexoes = sc.nextLine();
             produto.setConexoes(conexoes);
             break;
         } while (true);
+
         // Adicionar produto à lista:
         lista.add(produto);
     }
 
-    // Método para cadastrar um produto de vestuário:
     public void cadastrarProdutoVestuario(ArrayList<Produto> lista) {
         ProdutosVestuario produto = new ProdutosVestuario();
         // Cadastro geral classe mãe:
@@ -259,7 +248,7 @@ public class Produto {
 
         // Cadastrar tamanho:
         do {
-            System.out.print("\n-> Insira o tamanho do produto: ");
+            System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira o tamanho do produto"+Cores.RESET+": ");
             String tamanho = sc.nextLine();
             produto.setTamanho(tamanho);
             break;
@@ -267,7 +256,7 @@ public class Produto {
 
         // Cadastrar cor:
         do {
-            System.out.print("\n-> Insira a cor do produto: ");
+            System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira a cor do produto"+Cores.RESET+": ");
             String cor = sc.nextLine();
             produto.setCor(cor);
             break;
@@ -275,7 +264,7 @@ public class Produto {
 
         // Cadastrar material:
         do {
-            System.out.print("\n-> Insira o material do produto: ");
+            System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira o material do produto"+Cores.RESET+": ");
             String material = sc.nextLine();
             produto.setMaterial(material);
             break;
@@ -285,119 +274,115 @@ public class Produto {
         lista.add(produto);
     }
     
-    // Método para editar o nome:
+    // Método para editar o nome do produto:
     public void editarNome(ArrayList<Produto> lista, byte id) {
-        System.out.print("-> Insira o novo nome: ");
-        sc.nextLine();
+        System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira o novo nome"+Cores.RESET+": ");
         String newNome = sc.nextLine();
         for (Produto produto : lista) {
             if (produto.getID() == id) {
                 produto.setNome(newNome);
-                System.out.println("*** Nome atualizado com sucesso! ***");
+                System.out.println(Cores.VERDE+"*** Nome atualizado com sucesso! ***"+Cores.RESET);
                 visualizarProduto(lista, id);
             }
         }
     }
-    
-    // Método para editar a marca:
+
+    // Método para editar a marca do produto:
     public void editarMarca(ArrayList<Produto> lista, byte id) {
-        System.out.print("-> Insira a nova marca: ");
-        sc.nextLine();
+        System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira a nova marca"+Cores.RESET+": ");
         String newMarca = sc.nextLine();
         for (Produto produto : lista) {
             if (produto.getID() == id) {
                 produto.setMarca(newMarca);
-                System.out.println("*** Marca atualizada com sucesso! ***");
+                System.out.println(Cores.VERDE+"*** Marca atualizada com sucesso! ***"+Cores.RESET);
                 visualizarProduto(lista, id);
             }
         }
     }
-    
-    // Método para editar o preço:
+
+    // Método para editar o preço do produto:
     public void editarPreco(ArrayList<Produto> lista, byte id) {
         do {
-            System.out.print("-> Insira o novo preço: ");
+            System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira o novo preço"+Cores.RESET+": ");
             if (sc.hasNextDouble()) {
                 double newPreco = sc.nextDouble();
                 for (Produto produto : lista) {
                     if (produto.getID() == id) {
                         produto.setPreco(newPreco);
-                        System.out.println("*** O preço do produto foi atualizado com sucesso! ***");
+                        System.out.println(Cores.VERDE+"*** O preço do produto foi atualizado com sucesso! ***"+Cores.RESET);
                         visualizarProduto(lista, id);
                     }
                 }
             break;
             } else {
-                System.out.println("*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***");
+                System.out.println(Cores.VERMELHO+"*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***"+Cores.RESET);
                 sc.nextLine();
             }
-
         } while (true);
     }
 
-    // Método para editar a quantidade:
+    // Método para editar a quantidade do produto:
     public void editarQuantidade(ArrayList<Produto> lista, byte id) {
         do{
-            System.out.print("-> Digite o valor a adicionar, para diminuir, insira um valor negativo: ");
+            System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Digite o valor a adicionar, para diminuir, insira um valor negativo"+Cores.RESET+": ");
             if(sc.hasNextInt()) {
                 int newQnt = sc.nextInt();
                 for (Produto produto : lista) {
                     // Adicionar à quantidade atual de produtos a quantidade inserida pelo usuário:
                     if (produto.getID() == id) {
                         produto.setQnt(produto.getQnt() + newQnt);
-                        System.out.println("*** A quantidade do produto foi atualizado com sucesso! ***");
+                        System.out.println(Cores.VERDE+"*** A quantidade do produto foi atualizado com sucesso! ***"+Cores.RESET);
                         visualizarProduto(lista, id);
                         break;
                     }
                 }
                 break;
             } else {
-                System.out.println("\n*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***\n");
+                System.out.println(Cores.VERMELHO+"\n*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***\n"+Cores.RESET);
                 sc.next();
             }
         } while(true);
     }
 
-    // Método para editar o peso:
+    // Método para editar o peso do produto:
     public void editarPeso(ArrayList<Produto> lista, byte id) {
             do {
-                System.out.print("-> Insira o novo peso: ");
+                System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira o novo peso"+Cores.RESET+": ");
                 if (sc.hasNextDouble()) {
                     double newPeso = sc.nextDouble();
                     for (Produto produto : lista) {
                         if (produto.getID() == id) {
                             ProdutosAlimenticios produtoA = (ProdutosAlimenticios) produto;
                             produtoA.setPeso(newPeso);
-                            System.out.println("*** O peso do produto foi atualizado com sucesso! ***");
+                            System.out.println(Cores.VERDE+"*** O peso do produto foi atualizado com sucesso! ***"+Cores.RESET);
                             visualizarProduto(lista, id);
                         }
                     }
                 break;
                 } else {
-                    System.out.println("*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***");
+                    System.out.println(Cores.VERMELHO+"*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***"+Cores.RESET);
                     sc.nextLine();
                 }
-
             } while (true);
     }
 
-    // Método para editar a data de validade:
+    // Método para editar a data de validade do produto:
     public void editarDataValidade(ArrayList<Produto> lista, byte id) {
-        System.out.print("-> Insira a nova data de validade: ");
+        System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira a nova data de validade"+Cores.RESET+": ");
         String newDataValidade = sc.nextLine();
         for (Produto produto : lista) {
             if (produto.getID() == id) {
                 ProdutosAlimenticios produtoA = (ProdutosAlimenticios) produto;
                 produtoA.setDataValidade(newDataValidade);
-                System.out.println("*** A data de validade do produto foi atualizado com sucesso! ***");
+                System.out.println(Cores.VERDE+"*** A data de validade do produto foi atualizado com sucesso! ***"+Cores.RESET);
                 visualizarProduto(lista, id);
             }
         }
     }
 
-    // Método para editar o modelo:
+    // Método para editar o modelo do produto:
     public void editarModelo(ArrayList<Produto> lista, byte id) {
-        System.out.print("-> Insira o novo modelo: ");
+        System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira o novo modelo"+Cores.RESET+": ");
         String newModelo = sc.nextLine();
         for (Produto produto : lista) {
             if (produto.getID() == id) {
@@ -405,92 +390,92 @@ public class Produto {
                 produtoE.setModelo(newModelo);
             }
         }
-        System.out.println("*** O modelo do produto foi atualizado com sucesso! ***");
+        System.out.println(Cores.VERDE+"*** O modelo do produto foi atualizado com sucesso! ***"+Cores.RESET);
         visualizarProduto(lista, id);
     }
 
-    // Método para editar o tamanho do eletrônico:
+    // Método para editar o tamanho do produto eletrônico:
     public void editarTamanhoE(ArrayList<Produto> lista, byte id) {
-        System.out.print("-> Insira o novo tamanho: ");
+        System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira o novo tamanho"+Cores.RESET+": ");
         String newTamanhoE = sc.nextLine();
         for (Produto produto : lista) {
             if (produto.getID() == id) {
                 ProdutosEletronicos produtoE = (ProdutosEletronicos) produto;
                 produtoE.setTamanho(newTamanhoE);
-                System.out.println("*** O tamanho do produto foi atualizado com sucesso! ***");
+                System.out.println(Cores.VERDE+"*** O tamanho do produto foi atualizado com sucesso! ***"+Cores.RESET);
                 visualizarProduto(lista, id);
             }
         }
     }
 
-    // Método para editar as conexões:
+    // Método para editar as conexões do produto:
     public void editarConexoes(ArrayList<Produto> lista, byte id) {
         String newConexoes;
-        System.out.print("-> Insira as novas conexões: ");
+        System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira as novas conexões"+Cores.RESET+": ");
         newConexoes = sc.nextLine();
         for (Produto produto : lista) {
             if (produto.getID() == id) {
                 ProdutosEletronicos produtoE = (ProdutosEletronicos) produto;
                 produtoE.setConexoes(newConexoes);
-                System.out.println("*** As conexões do produto foram atualizadas com sucesso! ***");
+                System.out.println(Cores.VERDE+"*** As conexões do produto foram atualizadas com sucesso! ***"+Cores.RESET);
                 visualizarProduto(lista, id);
             }
         }
     }
 
-    // Método para editar o tamanho da vestimenta:
+    // Método para editar o tamanho do produto de vestuário:
     public void editarTamanhoV(ArrayList<Produto> lista, byte id) {
-        System.out.print("-> Insira o novo tamanho: ");
+        System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira o novo tamanho"+Cores.RESET+": ");
         String newTamanhoV = sc.nextLine();
         for (Produto produto : lista) {
             if (produto.getID() == id) {
                 ProdutosVestuario produtoV = (ProdutosVestuario) produto;
                 produtoV.setTamanho(newTamanhoV);
-                System.out.println("*** O tamanho do produto foi atualizado com sucesso! ***");
+                System.out.println(Cores.VERDE+"*** O tamanho do produto foi atualizado com sucesso! ***"+Cores.RESET); 
                 visualizarProduto(lista, id);
             }
         }
     }
 
-    // Método para editar a cor:
+    // Método para editar a cor do produto:
     public void editarCor(ArrayList<Produto> lista, byte id) {
-        System.out.print("-> Insira a nova cor: ");
+        System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira a nova cor"+Cores.RESET+": ");
         String newCor = sc.nextLine();
         for (Produto produto : lista) {
             if (produto.getID() == id) {
                 ProdutosVestuario produtoV = (ProdutosVestuario) produto;
                 produtoV.setCor(newCor);
-                System.out.println("*** A cor do produto foi atualizado com sucesso! ***");
+                System.out.println(Cores.VERDE+"*** A cor do produto foi atualizado com sucesso! ***"+Cores.RESET);
                 visualizarProduto(lista, id);
             }
         }
     }
 
-    // Método para editar o material:
+    // Método para editar o material do produto:
     public void editarMaterial(ArrayList<Produto> lista, byte id) {
-        System.out.print("-> Insira o novo material: ");
+        System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira o novo material"+Cores.RESET+": ");
         String newMaterial = sc.nextLine();
         for (Produto produto : lista) {
             if (produto.getID() == id) {
                 ProdutosVestuario produtoV = (ProdutosVestuario) produto;
                 produtoV.setMaterial(newMaterial);
-                System.out.println("*** O material do produto foi atualizado com sucesso! ***");
+                System.out.println(Cores.VERDE+"*** O material do produto foi atualizado com sucesso! ***"+Cores.RESET);
                 visualizarProduto(lista, id);
             }
         }
     }
 
-    // Lógica para editar um produto alimenticio(cada atributo dele):
+    // Método para editar um produto alimenticio(cada atributo dele):
     public void editarProdutoAlimenticio(ArrayList<Produto> lista, byte id) {
         // boolean para indicar se existe ou não um produto no ID selecionado, com o padrão false:
-        boolean existe = true;
+        boolean existe = false;
         for (Produto produto : lista) {
-            // Se o id do produto for o id indicado pelo usuário, indicará os atributos do
-            // produto e definirá o boolean para true:
+            // Se o id do produto for o id indicado pelo usuário, indicará os atributos do produto e definirá o boolean para true:
             if (produto.getID() == id) {
                 visualizarProduto(lista, id);
+                existe = true;
             } else {
-
+                
             }
         }
 
@@ -499,9 +484,10 @@ public class Produto {
         if (existe) {
             do{
                 System.out.println("\n1- Nome | 2- Marca | 3- Preço | 4- Quantidade | 5- Peso | 6- Data de validade | 0- VOLTAR AO MENU! ");
-                System.out.print("-> Insira a opção a editar no produto: ");
+                System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira a opção a editar no produto"+Cores.RESET+": ");
                 if (sc.hasNextByte()) {
                     escolha = sc.nextByte();
+                    sc.nextLine();
                     switch (escolha) {
                         // Definir novo nome:
                         case 1:
@@ -527,23 +513,25 @@ public class Produto {
                         case 6:
                             editarDataValidade(lista, id);
                             break;
+                        // Voltar ao menu principal:
                         case 0:
-                            System.out.println("\n*** Voltando ao menu principal! ***");
-                            sc.nextLine();
+                            System.out.println(Cores.VERMELHO+"\n*** Voltando ao menu principal! ***"+Cores.RESET);
                             return;
+                        default:
+                            System.out.println(Cores.VERMELHO+"\n*** Insira um valor dentro dos parâmetros! ***"+Cores.RESET);
                     }
                 } else {
-                    System.out.println("\n*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***");
+                    System.out.println(Cores.VERMELHO+"\n*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***"+Cores.RESET);
                     sc.next();
                 }
             } while (true);
         } else {
             // Caso digite um id incorreto de produto:
-            System.out.println("\n*** Não há nenhum produto com esse ID! ***");
+            System.out.println(Cores.VERMELHO+"\n*** Não há nenhum produto com esse ID! ***"+Cores.RESET);
         }
     }
 
-    // Lógica para editar um produto eletrônico(cada atributo dele):
+    // Método para editar um produto eletrônico(cada atributo dele):
     public void editarProdutoEletronico(ArrayList<Produto> lista, byte id) {
         // boolean para indicar se existe ou não um produto no ID selecionado, com o padrão false:
         boolean existe = false;
@@ -559,9 +547,10 @@ public class Produto {
         if (existe) {
             do{
                 System.out.println("\n1- Nome | 2- Marca | 3- Preço | 4- Quantidade | 5- Modelo | 6-Tamanho | 7-Conexões | 0- VOLTAR AO MENU! ");
-                System.out.print("-> Insira a opção a editar no produto: ");
+                System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira a opção a editar no produto"+Cores.RESET+": ");
                 if (sc.hasNextByte()) {
                     escolha = sc.nextByte();
+                    sc.nextLine();
                     switch (escolha) {
                         case 1:
                             editarNome(lista, id);
@@ -588,22 +577,24 @@ public class Produto {
                             editarConexoes(lista, id);
                             break;
                         case 0:
-                            System.out.println("\n*** Voltando ao menu principal! ***");
-                            sc.nextLine();
+                        // Voltar ao menu principal:
+                            System.out.println(Cores.VERMELHO+"\n*** Voltando ao menu principal! ***"+Cores.RESET);
                             return;
+                        default:
+                            System.out.println(Cores.VERMELHO+"\n*** Insira um valor dentro dos parâmetros! ***"+Cores.RESET);
                     }
                 } else {
-                    System.out.println("\n*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***");
+                    System.out.println(Cores.VERMELHO+"\n*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***"+Cores.RESET);
                     sc.next();
                 }
             } while (true);
         } else {
             // Caso digite um id incorreto de produto:
-            System.out.println("\n*** Não há nenhum produto com esse ID! ***");
+            System.out.println(Cores.VERMELHO+"\n*** Não há nenhum produto com esse ID! ***"+Cores.RESET);
         }
     }
 
-    // Lógica para editar um produto de vestuário(cada atributo dele):
+    // Método para editar um produto de vestuário(cada atributo dele):
     public void editarProdutoVestuario(ArrayList<Produto> lista, byte id) {
         // boolean para indicar se existe ou não um produto no ID selecionado, com o padrão false:
         boolean existe = false;
@@ -612,16 +603,18 @@ public class Produto {
             if (produto.getID() == id) {
                 visualizarProduto(lista, id);
                 existe = true;
+                break;
             }
         }
-        // Caso o produto exista, irá perguntar qual atributo o usuário deseja editar e, dependendo da resposta, executará um dos switch case, caso não exista, enviará a mensagem:
+        // Caso o produto exista, irá perguntar qual atributo o usuário deseja editar e, dependendo da resposta, executará um dos switch case; caso não exista, enviará a mensagem:
         byte escolha = 0;
         if (existe) {
             do{
                 System.out.println("\n1- Nome | 2- Marca | 3- Preço | 4- Quantidade | 5- Tamanho | 6-Cor | 7-Material | 0-VOLTAR AO MENU! ");
-                System.out.print("-> Insira a opção a editar no produto: ");
+                System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira a opção a editar no produto"+Cores.RESET+": ");
                 if (sc.hasNextByte()) {
                     escolha = sc.nextByte();
+                    sc.nextLine();
                     switch (escolha) {
                         case 1:
                             editarNome(lista, id);
@@ -648,55 +641,56 @@ public class Produto {
                             editarMaterial(lista, id);
                             break;
                         case 0:
-                            System.out.println("\n*** Voltando ao menu principal! ***");
-                            sc.nextLine();
+                        // Voltar ao menu principal:
+                            System.out.println(Cores.VERMELHO+"\n*** Voltando ao menu principal! ***"+Cores.RESET);
                             return;
+                        default:
+                            System.out.println(Cores.VERMELHO+"\n*** Insira um valor dentro dos parâmetros! ***"+Cores.RESET);
                     }
                 } else {
-                    System.out.println("\n*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***");
+                    System.out.println(Cores.VERMELHO+"\n*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***"+Cores.RESET);
                     sc.next();
                 }
             } while (true);
         } else {
             // Caso digite um id incorreto de produto:
-            System.out.println("\n*** Não há nenhum produto com esse ID! ***");
+            System.out.println(Cores.VERMELHO+"\n*** Não há nenhum produto com esse ID! ***"+Cores.RESET);
         }
     }
 
-    // Lógica para remover um produto com for each e remover o ID da lista de IDs, para que possa ser gerado novamente, foi necessária a criação de uma nova lista de objetos, para evitar que aconteça o erro de remoção dentro do loop:
+    // Método para remover um produto com for each e remover o ID da lista de IDs, para que possa ser gerado novamente, foi necessária a criação de uma nova lista de objetos, para evitar que aconteça o erro de remoção dentro do loop:
     public void removerProduto(ArrayList<Produto> lista, byte id) {
-        // boolean para indicar se existe ou não um produto no ID selecionado, com o
-        // padrão false:
+        // boolean para indicar se existe ou não um produto no ID selecionado, com o padrão false:
         boolean existe = false;
         ArrayList<Produto> listaProdutosTemp = new ArrayList<>(lista);
         for (Produto produto : listaProdutosTemp) {
             // Se o id do produto for o id indicado pelo usuário, definirá o boolean para true, removerá o produto da ArrayList e removerá o seu id da ArrayList de IDs:
             if (produto.getID() == id) {
                 existe = true;
-                System.out.print("Deseja mesmo remover o produto ID "+id+" - "+produto.getNome()+"? (s/n): ");
+                System.out.print(Cores.VERMELHO+"Deseja mesmo remover o produto ID "+id+" - "+produto.getNome()+"? (s/n)"+Cores.RESET+": ");
                 String confirmacao = sc.nextLine();
                 switch(confirmacao) {
                     case "s":
                     lista.remove(produto);
                     IDs.remove(IDs.indexOf(produto.getID()));
-                    System.out.println("*** Produto removido! ***");
+                    System.out.println(Cores.VERDE+"*** Produto removido! ***"+Cores.RESET);
                     break;
                     case "n":
-                    System.out.println("*** Produto não removido! ***");
+                    System.out.println(Cores.VERMELHO+"*** Produto não removido! ***"+Cores.RESET);
                     return;
                     default:
-                    System.out.println("\n*** Insira um valor correto (s/n) ***");
+                    System.out.println(Cores.VERMELHO+"\n*** Insira um valor correto (s/n) ***"+Cores.RESET);
                 }
             }
         }
         // Caso não exista, enviará uma mensagem indicando, caso contrário, enviará a mensagem que o produto foi removido:
         if (!existe) {
-            System.out.println("\n*** Não há nenhum produto com esse ID! ***");
+            System.out.println(Cores.VERMELHO+"\n*** Não há nenhum produto com esse ID! ***"+Cores.RESET);
         }
         listaProdutosTemp.clear();
     }
 
-    // Lógica para listar apenas os produtos com x categoria, filtro:
+    // Método para listar apenas os produtos com x categoria, filtro:
     public void filtrarCategoria(ArrayList<Produto> lista) {
         // Quantidade de produtos por categoria:
         int qntA = 0; int qntE = 0; int qntV = 0;
@@ -713,15 +707,15 @@ public class Produto {
         byte catFiltro = 0;
         do {
             System.out.println("\n-----<<<|CATEGORIAS|>>>----- \n1-ALIMENTOS ["+qntA+"] \n2-ELETRÔNICOS ["+qntE+"] \n3-VESTUÁRIO ["+qntV+"]\n");
-            System.out.print("-> Insira a categoria a visualizar: ");
+            System.out.print("\n>>> "+Cores.AMARELO+Cores.AMARELO_SUBLINHADO+"Insira a categoria a visualizar"+Cores.RESET+": ");
             if(sc.hasNextByte()) {
                 catFiltro = sc.nextByte();
                 if (catFiltro>3 || catFiltro<1) {
-                    System.out.println("\n*** Insira um valor válido! ***");
+                    System.out.println(Cores.VERMELHO+"\n*** Insira um valor válido! ***"+Cores.RESET);
                 }
                 sc.nextLine();
             } else {
-                System.out.println("\n*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***");
+                System.out.println(Cores.VERMELHO+"\n*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***"+Cores.RESET);
                 sc.nextLine();
             }
         } while (catFiltro < 1 || catFiltro > 3);
@@ -740,25 +734,23 @@ public class Produto {
         }
         // boolean para indicar se existe ou não um produto no ID selecionado, com o padrão false:
         boolean possui = false;
-        
         // Ordenar a lista com Comparator e stream.collectors:
         List<Produto> listaOrdenadaFiltro = lista.stream().sorted(Comparator.comparingInt(Produto::getID)).collect(Collectors.toList());
         System.out.print("\n-----<<<|"+categoriafiltro+"|>>>----- \n");
         for (Produto produtoOrd : listaOrdenadaFiltro) {
             if(produtoOrd.getCategoria()==categoriafiltro) {
-                    // Se a categoria do produto for a mesma selecionada, irá definir o boolean possui para true e enviá-la:
-                   if (produtoOrd.getCategoria() == categoriafiltro) {
-                       System.out.print("\nID: " + produtoOrd.getID() + " ||Nome: " + produtoOrd.getNome() + "\n");
-                       possui = true;
-                   } else {
-                       continue;
-                   }
+                // Se a categoria do produto for a mesma selecionada, irá definir o boolean possui para true e enviá-la:
+                if (produtoOrd.getCategoria() == categoriafiltro) {
+                    System.out.print("\nID: " + produtoOrd.getID() + " ||Nome: " + produtoOrd.getNome() + "\n");
+                    possui = true;
+                } else {
+                    continue;
+                }
             }
         }
-        
         // Caso não possua, irá enviar a mensagem, indicando que não há produtos em dada categoria:
         if (!possui) {
-            System.out.println("\n*** Não há produtos nesta categoria! ***");
+            System.out.println(Cores.VERMELHO+"\n*** Não há produtos nesta categoria! ***"+Cores.RESET);
         }
     }
 }

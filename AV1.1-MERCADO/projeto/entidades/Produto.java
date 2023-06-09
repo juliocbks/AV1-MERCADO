@@ -105,7 +105,7 @@ public class Produto {
         return random;
     }
 
-    // Lógica para listar todos os produtos com for each:
+    // Método para listar todos os produtos com for each:
     public void listarProdutos(ArrayList<Produto> lista) {
         System.out.print("\n-----<<<|LISTA DE PRODUTOS|>>>----- \n");
         for (Produto produto : lista) {
@@ -113,14 +113,12 @@ public class Produto {
         }
     }
 
-    // Lógica para visualizar um único produto com base no ID, loop for each
+    // Método para visualizar um único produto com base no ID, loop for each
     public void visualizarProduto(ArrayList<Produto> lista, byte id) {
-        // boolean para indicar se existe ou não um produto no ID selecionado, com o
-        // padrão false:
+        // boolean para indicar se existe ou não um produto no ID selecionado, com o padrão false:
         boolean existe = false;
         for (Produto produto : lista) {
-            // Caso o id do produto seja o id inserido pelo usuário, irá listar o produto e
-            // definir que o produto existe:
+            // Caso o id do produto seja o id inserido pelo usuário, irá listar o produto e definir que o produto existe:
             if (produto.getID() == id) {
                 System.out.print("\n<<<|PRODUTO ID " + id + "|>>>" + "\nNome: " + produto.getNome() + "\nMarca: "
                         + produto.getMarca() + "\nCategoria: " + produto.getCategoria() + "\nPreço: "
@@ -134,7 +132,7 @@ public class Produto {
         }
     }
 
-    // Lógica para cadastrar um novo produto:
+    // Método para cadastrar um novo produto:
     public void cadastrarProduto(ArrayList<Produto> lista) {
         Produto produto = new Produto();
 
@@ -146,9 +144,7 @@ public class Produto {
         String marca = sc.nextLine();
         produto.setMarca(marca);
 
-        // No caso da categoria, irá listar as categorias e, com um switch case do tipo
-        // integer, definir a categoria do produto, caso o input não seja um número, irá
-        // pedir novamente para digitar um valor numérico:
+        // No caso da categoria, irá listar as categorias e, com um switch case do tipo integer, definir a categoria do produto, caso o input não seja um número, irá pedir novamente para digitar um valor numérico:
         byte cat = 0;
 
         do {
@@ -235,14 +231,12 @@ public class Produto {
         sc.nextLine();
     }
 
-    // Lógica para editar um produto(cada atributo dele):
+    // Método para editar um produto(cada atributo dele):
     public void editarProduto(ArrayList<Produto> lista, byte id) {
-        // boolean para indicar se existe ou não um produto no ID selecionado, com o
-        // padrão false:
+        // boolean para indicar se existe ou não um produto no ID selecionado, com o padrão false:
         boolean existe = false;
         for (Produto produto : lista) {
-            // Se o id do produto for o id indicado pelo usuário, indicará os atributos do
-            // produto e definirá o boolean para true:
+            // Se o id do produto for o id indicado pelo usuário, indicará os atributos do produto e definirá o boolean para true:
             if (produto.getID() == id) {
                 System.out.print("\n<<<|PRODUTO ID " + id + "|>>>" + "\nNome: " + produto.getNome() + "\nMarca: "
                         + produto.getMarca() + "\nCategoria: " + produto.getCategoria() + "\nPreço: "
@@ -250,9 +244,7 @@ public class Produto {
                 existe = true;
             }
         }
-        // Caso o produto exista, irá perguntar qual atributo o usuário deseja editar e,
-        // dependendo da resposta, executará um dos switch case; caso não exista,
-        // enviará a mensagem:
+        // Caso o produto exista, irá perguntar qual atributo o usuário deseja editar e, dependendo da resposta, executará um dos switch case; caso não exista, enviará a mensagem:
         int escolha = 0;
         if (existe) {
             do{
@@ -437,26 +429,20 @@ public class Produto {
         }
     }
 
-    // Lógica para remover um produto com for each e remover o ID da lista de IDs,
-    // para que possa ser gerado novamente, foi necessária a criação de uma nova
-    // lista de objetos, para evitar que aconteça o erro de remoção dentro do loop:
+    // Método para remover um produto com for each e remover o ID da lista de IDs, para que possa ser gerado novamente, foi necessária a criação de uma nova lista de objetos, para evitar que aconteça o erro de remoção dentro do loop:
     public void removerProduto(ArrayList<Produto> lista, byte id) {
-        // boolean para indicar se existe ou não um produto no ID selecionado, com o
-        // padrão false:
+        // boolean para indicar se existe ou não um produto no ID selecionado, com o padrão false:
         boolean existe = false;
         ArrayList<Produto> listaProdutos2 = new ArrayList<>(lista);
         for (Produto produto : listaProdutos2) {
-            // Se o id do produto for o id indicado pelo usuário, definirá o boolean para
-            // true, removerá o produto da ArrayList e removerá o seu id da ArrayList de
-            // IDs:
+            // Se o id do produto for o id indicado pelo usuário, definirá o boolean para true, removerá o produto da ArrayList e removerá o seu id da ArrayList de IDs:
             if (produto.getID() == id) {
                 existe = true;
                 lista.remove(produto);
                 IDs.remove(IDs.indexOf(produto.getID()));
             }
         }
-        // Caso não exista, enviará uma mensagem indicando, caso contrário, enviará a
-        // mensagem que o produto foi removido:
+        // Caso não exista, enviará uma mensagem indicando, caso contrário, enviará a mensagem que o produto foi removido:
         if (!existe) {
             System.out.println("\n*** Não há nenhum produto com esse ID! ***");
         } else {
@@ -465,7 +451,7 @@ public class Produto {
         listaProdutos2.clear();
     }
 
-    // Lógica para listar apenas os produtos com x categoria, filtro:
+    // Método para listar apenas os produtos com x categoria, filtro:
     public void filtrarCategoria(ArrayList<Produto> lista) {
         // Enviar categorias:
         byte catv = 0;
@@ -486,8 +472,7 @@ public class Produto {
             }
         } while (catv < 1 || catv > 11);
         Categorias categoriafiltro = outros;
-        // Switch case para definir a categoria a ser filtrada, a categoria padrão é
-        // OUTROS:
+        // Switch case para definir a categoria a ser filtrada, a categoria padrão é OUTROS:
         switch (catv) {
             case 1:
                 categoriafiltro = bebidas;
@@ -524,13 +509,11 @@ public class Produto {
                 break;
             default:
         }
-        // boolean para indicar se existe ou não um produto no ID selecionado, com o
-        // padrão false:
+        // boolean para indicar se existe ou não um produto no ID selecionado, com o padrão false:
         boolean possui = false;
         System.out.println("\n-----<<<|" + categoriafiltro + "|>>>-----");
         for (Produto produto : lista) {
-            // Se a categoria do produto for a mesma selecionada, irá definir o boolean
-            // possui para true e enviá-la:
+            // Se a categoria do produto for a mesma selecionada, irá definir o boolean possui para true e enviá-la:
             if (produto.getCategoria() == categoriafiltro) {
                 System.out.print("\nID: " + produto.getID() + " ||Nome: " + produto.getNome() + "\n");
                 possui = true;
@@ -538,8 +521,7 @@ public class Produto {
                 continue;
             }
         }
-        // Caso não possua, irá enviar a mensagem, indicando que não há produtos em dada
-        // categoria:
+        // Caso não possua, irá enviar a mensagem, indicando que não há produtos em dada categoria:
         if (!possui) {
             System.out.println("\n*** Não há produtos nesta categoria! ***");
         }

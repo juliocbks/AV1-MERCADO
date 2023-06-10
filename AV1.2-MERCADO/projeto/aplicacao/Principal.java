@@ -97,7 +97,7 @@ public class Principal {
                             }
                             break;
                         } else {
-                            System.out.println(Cores.VERMELHO+"\n*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***\n"+Cores.RESET);
+                            System.out.println(Cores.VERMELHO+"*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***"+Cores.RESET);
                             sc.next();
                         }
                     } while(true);

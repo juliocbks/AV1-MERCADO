@@ -8,7 +8,7 @@ import java.util.List; // Utilizado para armazenar dados;
 import java.util.Random; // Utilizado para gerar números aleatórios em um range;
 import java.util.Comparator; // Utilizado para ordenação;
 import java.util.stream.Collectors; // Utilizado para ordenação;
-import java.util.Date; // Utilitário Data;
+import java.util.Date; //import utilitário Data
 
 // Classe pai Produto:
 public class Produto {

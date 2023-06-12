@@ -17,6 +17,9 @@ public class Principal {
 
         // Inicialização do objeto da classe Produto:
         Produto produto = new Produto();
+        ProdutosAlimenticios produtoA = new ProdutosAlimenticios();
+        ProdutosEletronicos produtoE = new ProdutosEletronicos();
+        ProdutosVestuario produtoV = new ProdutosVestuario();
 
         // Inicialização da ArrayList e dos objetos random e scanner:
         ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
@@ -84,18 +87,19 @@ public class Principal {
                             byte tipo = sc.nextByte();
                             switch(tipo) {
                                 case 1:
-                                produto.cadastrarProdutoAlimenticio(listaProdutos);
+                                produtoA.cadastrarProdutoAlimenticio(listaProdutos);
                                 break;
                                 case 2:
-                                produto.cadastrarProdutoEletronico(listaProdutos);
+                                produtoE.cadastrarProdutoEletronico(listaProdutos);
                                 break;
                                 case 3:
-                                produto.cadastrarProdutoVestuario(listaProdutos);
+                                produtoV.cadastrarProdutoVestuario(listaProdutos);
                                 break;
                                 default:
                                 System.out.println(Cores.VERMELHO+"*** Por favor, insira um valor dentro dos parâmetros! ***"+Cores.RESET);
                             }
                             break;
+                            
                         } else {
                             System.out.println(Cores.VERMELHO+"*** Valor informado é inválido, por favor, digite novamente um valor numérico válido! ***"+Cores.RESET);
                             sc.next();
